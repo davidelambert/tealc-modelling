@@ -4,10 +4,17 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 from statsmodels.api import OLS
-import plotly
+import plotly.express as px
 
 ROOT = Path(__file__).parent.resolve()
 d = pd.read_csv(ROOT/'data.csv')
+
+# %%[markdown]
+# ## Mean unit weights
+# For gauge/material items with unit weight data from both GHS and D'Addario,
+# take the simple mean unit weight of both brands. Also include gauge/material
+# items produced by only one brand. Format these data as JSON, keyed by
+# material, to use as a unit weight lookup table when possible.
 
 # %%
 uw_means = d.groupby(['gauge', 'material'], as_index=False).mean()
@@ -51,4 +58,57 @@ with open(ROOT/'unit_weights.json', 'a') as f:
         else:
             f.write(key[1:-1])
     f.write('}')
+
+# %%[markdown]
+# ## Visualization
+
+# %%
+mat_map = {
+    'ps': 'Plain Steel',
+    'nps': 'Nickel-Plated Steel Roundwound',
+    'ss': 'Stainless Steel Roundwound',
+    'pn': 'Pure Nickel Roundwound',
+    'fw': 'Stainless Steel Flatwound',
+    'pb': 'Phosphor Bronze Roundwound',
+    '8020': '80/20 Bronze Roundwound',
+    '8515': '85/15 Bronze Roundwound',
+    'bnps': 'Nickel-Plated Steel Roundwound',
+    'bss': 'Stainless Steel Roundwound',
+    'bfw': 'Stainless Steel Flatwound'
+}
+
+d['gauge_sq'] = np.power(d['gauge'], 2)
+d['brand'] = d['brand2'].map({0: 'G', 1: 'D'})
+d['mat_long'] = d['material'].map(mat_map)
+
+# %%
+p_ps = px.scatter(d[d['material'] == 'ps'], x='gauge_sq', y='unit_weight',
+                  trendline='ols', title='Plain Steel Strings',
+                  hover_data={'gauge': True, 'gauge_sq': False, 'brand': True})
+p_ps.show()
+
+# %%
+elec_mat = ['nps', 'ss', 'pn', 'fw', ]
+elec_filter = [mat in elec_mat for mat in d['material']]
+p_elec = px.scatter(d.loc[elec_filter], x='gauge_sq', y='unit_weight',
+                    color='material', trendline='ols', title='Electric Wound Strings',
+                    hover_data={'gauge': True, 'gauge_sq': False, 'brand': True})
+p_elec.show()
+
+# %%
+acou_mat = ['pb', '8020', '8515', ]
+acou_filter = [mat in acou_mat for mat in d['material']]
+p_acou = px.scatter(d.loc[acou_filter], x='gauge_sq', y='unit_weight',
+                    color='material', trendline='ols', title='Acoustic Wound Strings',
+                    hover_data={'gauge': True, 'gauge_sq': False, 'brand': True})
+p_acou.show()
+
+# %%
+bass_mat = ['bnps', 'bss', 'bfw', ]
+bass_filter = [mat in bass_mat for mat in d['material']]
+p_bass = px.scatter(d.loc[bass_filter], x='gauge_sq', y='unit_weight',
+                    color='material', trendline='ols', title='Bass Strings',
+                    hover_data={'gauge': True, 'gauge_sq': False, 'brand': True})
+p_bass.show()
+
 # %%
