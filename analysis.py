@@ -91,24 +91,34 @@ p_ps.show()
 elec_mat = ['nps', 'ss', 'pn', 'fw', ]
 elec_filter = [mat in elec_mat for mat in d['material']]
 p_elec = px.scatter(d.loc[elec_filter], x='gauge_sq', y='unit_weight',
-                    color='material', trendline='ols', title='Electric Wound Strings',
-                    hover_data={'gauge': True, 'gauge_sq': False, 'brand': True})
+                    trendline='ols', title='Electric Wound Strings',
+                    hover_data={'gauge': True, 'gauge_sq': False, 'brand': True},
+                    color='material', color_discrete_map={'nps': '#008080',
+                                                          'ss': '#800080',
+                                                          'pn': '#40E0D0',
+                                                          'fw': '#EE82EE'})
 p_elec.show()
 
 # %%
 acou_mat = ['pb', '8020', '8515', ]
 acou_filter = [mat in acou_mat for mat in d['material']]
 p_acou = px.scatter(d.loc[acou_filter], x='gauge_sq', y='unit_weight',
-                    color='material', trendline='ols', title='Acoustic Wound Strings',
-                    hover_data={'gauge': True, 'gauge_sq': False, 'brand': True})
+                    trendline='ols', title='Acoustic Wound Strings',
+                    hover_data={'gauge': True, 'gauge_sq': False, 'brand': True},
+                    color='material', color_discrete_map={'pb': '#8B4513',
+                                                          '8020': '#FFD700',
+                                                          '8515': '#D2691E'})
 p_acou.show()
 
 # %%
 bass_mat = ['bnps', 'bss', 'bfw', ]
 bass_filter = [mat in bass_mat for mat in d['material']]
 p_bass = px.scatter(d.loc[bass_filter], x='gauge_sq', y='unit_weight',
-                    color='material', trendline='ols', title='Bass Strings',
-                    hover_data={'gauge': True, 'gauge_sq': False, 'brand': True})
+                    trendline='ols', title='Bass Strings',
+                    hover_data={'gauge': True, 'gauge_sq': False, 'brand': True},
+                    color='material', color_discrete_map={'bnps': '#008080',
+                                                          'bss': '#800080',
+                                                          'bfw': '#EE82EE'})
 p_bass.show()
 
 # %%
