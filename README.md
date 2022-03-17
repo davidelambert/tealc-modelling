@@ -92,9 +92,6 @@ with open(ROOT/'unit_weights.json', 'a') as f:
 ```
 
 ## Visualization
-Double click a material code in the legend to isolate. Single-click a
-material code to show/hide.
-
 
 ```python
 mat_map = {
