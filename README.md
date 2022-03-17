@@ -169,7 +169,8 @@ p_bass.show()
 ![bass strings scatterplot](/images/output_12_0.png)
 
 ## OLS modelling
-Build unit weight models of the form $UW_{i,m} = \alpha_m + \beta_m * gauge_{i}^{2}$
+Build unit weight models of the form
+<img src="https://render.githubusercontent.com/render/math?UW_{i,m} = \alpha_m + \beta_m * gauge_{i}^{2}">
 
 Build OLS models for each string material separately for ease of use and
 interpretation. Write constants and coefficients for each material to JSON for use
