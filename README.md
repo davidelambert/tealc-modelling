@@ -124,7 +124,7 @@ p_ps = px.scatter(d[d['material'] == 'ps'], x='gauge_sq', y='unit_weight',
                   width=600, height=400)
 p_ps.show()
 ```
-![plain steel strings scatterplot](/output_9_1.png)
+![plain steel strings scatterplot](/images/output_9_1.png)
 ```python
 elec_mat = ['nps', 'ss', 'pn', 'fw', ]
 elec_filter = [mat in elec_mat for mat in d['material']]
@@ -139,7 +139,7 @@ p_elec = px.scatter(d.loc[elec_filter], x='gauge_sq', y='unit_weight',
 p_elec.show()
 ```
 
-![electric strings scatterplot](/output_10_0.png)
+![electric strings scatterplot](/images/output_10_0.png)
 
 ```python
 acou_mat = ['pb', '8020', '8515', ]
@@ -154,7 +154,7 @@ p_acou = px.scatter(d.loc[acou_filter], x='gauge_sq', y='unit_weight',
 p_acou.show()
 ```
 
-![acoustic strings scatterplot](/output_11_0.png)
+![acoustic strings scatterplot](/images/output_11_0.png)
 
 ```python
 bass_mat = ['bnps', 'bss', 'bfw', ]
@@ -169,7 +169,7 @@ p_bass = px.scatter(d.loc[bass_filter], x='gauge_sq', y='unit_weight',
 p_bass.show()
 ```
 
-![bass strings scatterplot](/output_12_0.png)
+![bass strings scatterplot](/images/output_12_0.png)
 
 ## OLS modelling
 Build unit weight models of the form $UW_{i,m} = \alpha_m + \beta_m * gauge_{i}^{2}$
