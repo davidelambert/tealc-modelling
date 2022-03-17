@@ -1,3 +1,21 @@
+## String data analysis and modelling for `tenscalc` 
+
+This repository contains a basic
+analysis of data from string tension guides published by two major US string
+manufacturers. This analysis informs the development of the
+[tenscalc](http://github.com/davidelambert/tenscalc) Python package.
+
+What follows is a slightly condensed display version of the code contained in
+`analysis.py` and `analysis.ipynb`. `analysis.py` is the principal analysis script,
+written in a format compatible with Jupyter notebook-friendly editors likw VSCode or
+PyCharm Professional Edition (i.e. with pseudo-cells prepended by `# %%`).
+`analysis.ipynb` is a traditional Jupyter notebook produced from `analysis.py`.
+
+The version below contain static image scatterplots under the **Visualization** heading.
+These plots are available as interactive [plotly](https://plotly.com/graphing-libraries/)
+plots in `analysis.py` and `analysis.ipynb`.
+
+## Setup
 ```python
 from pathlib import Path
 import json
@@ -11,11 +29,11 @@ ROOT = Path.cwd()
 d = pd.read_csv(ROOT/'data.csv')
 ```
 
- ## Mean unit weights
- For gauge/material items with unit weight data from both GHS and D'Addario,
- take the simple mean unit weight of both brands. Also include gauge/material
- items produced by only one brand. Format these data as JSON, keyed by
- material, to use as a unit weight lookup table when possible.
+## Mean unit weights
+For gauge/material items with unit weight data from both GHS and D'Addario,
+take the simple mean unit weight of both brands. Also include gauge/material
+items produced by only one brand. Format these data as JSON, keyed by
+material, to use as a unit weight lookup table when possible.
 
 
 ```python
@@ -49,10 +67,10 @@ print("Gauges with > 10 percent difference from GHS/D'Addario mean: {}/{}"
       .format(pp10, n_gauges))
 ```
 
-    Gauges with > 5 percent difference from GHS/D'Addario mean: 21/88
-    Gauges with > 10 percent difference from GHS/D'Addario mean: 4/88
-
-
+```
+Gauges with > 5 percent difference from GHS/D'Addario mean: 21/88
+Gauges with > 10 percent difference from GHS/D'Addario mean: 4/88
+```
 
 ```python
 output = uw_means.loc[:, ['material', 'gauge', 'unit_weight']]
@@ -73,9 +91,9 @@ with open(ROOT/'unit_weights.json', 'a') as f:
     f.write('}')
 ```
 
- ## Visualization
- Double click a material code in the legend to isolate. Single-click a
- material code to show/hide.
+## Visualization
+Double click a material code in the legend to isolate. Single-click a
+material code to show/hide.
 
 
 ```python
@@ -153,13 +171,13 @@ p_bass.show()
 
 ![bass strings scatterplot](/output_12_0.png)
 
- ## OLS modelling
- Build unit weight models of the form $UW_{i,m} = \alpha_m + \beta_m * gauge_{i}^{2}$
+## OLS modelling
+Build unit weight models of the form $UW_{i,m} = \alpha_m + \beta_m * gauge_{i}^{2}$
 
- Build OLS models for each string material separately for ease of use and
- interpretation. Write constants and coefficients for each material to JSON for use
- when unit weights are not available from the lookup table created in the **Mean unit
- weights** section
+Build OLS models for each string material separately for ease of use and
+interpretation. Write constants and coefficients for each material to JSON for use
+when unit weights are not available from the lookup table created in the **Mean unit
+weights** section.
 
 
 ```python
