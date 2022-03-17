@@ -169,7 +169,7 @@ p_bass.show()
 ![bass strings scatterplot](/images/output_12_0.png)
 
 ## OLS modelling
-Build unit weight models of the form ![equation](/images/ols.png)
+Build unit weight models of the form: &nbsp;<img src="/images/ols.png" height=20px />
 
 Build OLS models for each string material separately for ease of use and
 interpretation. Write constants and coefficients for each material to JSON for use
