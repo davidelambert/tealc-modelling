@@ -1,9 +1,9 @@
-## String data analysis and modelling for `tenscalc` 
+## String data analysis and modelling for `tealc` 
 
 This repository contains a basic
 analysis of data from string tension guides published by two major US string
 manufacturers. This analysis informs the development of the
-[tenscalc](http://github.com/davidelambert/tenscalc) Python package.
+[tealc](http://github.com/davidelambert/tealc) Python package.
 
 What follows is a slightly condensed display version of the code contained in
 `analysis.py` and `analysis.ipynb`. `analysis.py` is the principal analysis script,
